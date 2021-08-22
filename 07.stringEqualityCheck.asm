@@ -4,6 +4,9 @@ org 100h
 mov si,offset str1            ;load starting address of str1 into si
 mov di,offset str2            ;load starting address of str2 into di 
 mov cx,len
+    
+cmp cx,len2                   ;compare length of the strings
+jne not_equal                 ;jump if strings are not equal
 
 cld                           ;clearing direction flag
 repe cmpsb                    ;repeat until cx > 0 or string byte mismatch
@@ -18,6 +21,7 @@ done:
 ret                           ;transfers control to return address on stack
 
 str1 db 'hakai'               ;initialization of str1
-en equ ($ - str1)             ;length 5 stored into len
+len equ ($ - str1)            ;length of str1 stored into len
 str2 db 'hakai'               ;initialization of str2
+len2 equ ($ - str2)           ;length of str2 stored into len2
 res db 0                      ;initialize variable to store result
